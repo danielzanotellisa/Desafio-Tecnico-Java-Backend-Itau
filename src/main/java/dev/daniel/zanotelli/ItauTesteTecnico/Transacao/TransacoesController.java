@@ -22,7 +22,7 @@ public class TransacoesController {
     public ResponseEntity criarTransacao(@Valid @RequestBody TransacaoRequest transacaoRequest) {
 
         try {
-            service.validate(transacaoRequest);
+            service.save(transacaoRequest);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (UnprocessableContent e) {
             ErrorResponse error = new ErrorResponse(e.getMessage(), HttpStatus.UNPROCESSABLE_CONTENT.value());
