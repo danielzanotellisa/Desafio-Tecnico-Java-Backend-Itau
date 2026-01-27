@@ -1,7 +1,7 @@
 package dev.daniel.zanotelli.ItauTesteTecnico.Transacao.Service;
 
 import dev.daniel.zanotelli.ItauTesteTecnico.Transacao.Request.TransacaoRequest;
-import dev.daniel.zanotelli.ItauTesteTecnico.Transacao.UnprocessableEntity;
+import dev.daniel.zanotelli.ItauTesteTecnico.Transacao.Exceptions.UnprocessableEntity;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

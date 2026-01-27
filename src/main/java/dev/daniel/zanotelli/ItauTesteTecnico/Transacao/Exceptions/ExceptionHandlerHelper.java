@@ -1,4 +1,4 @@
-package dev.daniel.zanotelli.ItauTesteTecnico.Transacao;
+package dev.daniel.zanotelli.ItauTesteTecnico.Transacao.Exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

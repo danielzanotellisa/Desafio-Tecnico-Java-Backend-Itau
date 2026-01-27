@@ -1,4 +1,4 @@
-package dev.daniel.zanotelli.ItauTesteTecnico.Transacao;
+package dev.daniel.zanotelli.ItauTesteTecnico.Transacao.Exceptions;
 
 public class UnprocessableEntity extends RuntimeException {
 
