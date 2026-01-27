@@ -1,5 +1,6 @@
 package dev.daniel.zanotelli.ItauTesteTecnico.Transacao.Service;
 
+import dev.daniel.zanotelli.ItauTesteTecnico.Transacao.Repository.TransacaoRepository;
 import dev.daniel.zanotelli.ItauTesteTecnico.Transacao.Request.TransacaoRequest;
 import dev.daniel.zanotelli.ItauTesteTecnico.Transacao.Exceptions.UnprocessableContent;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,14 @@ import java.time.OffsetDateTime;
 @Service
 public class TransacaoService {
 
-    public void validate(TransacaoRequest transacaoRequest) {
+
+    private TransacaoRepository repository;
+
+    public TransacaoService() {
+        this.repository = new TransacaoRepository();
+    }
+
+    protected void validate(TransacaoRequest transacaoRequest) {
 
         if(transacaoRequest.valor().compareTo(BigDecimal.ZERO) < 0) {
             throw new UnprocessableContent("O valor deve ser maior ou igual a zero");
@@ -19,5 +27,11 @@ public class TransacaoService {
         if(transacaoRequest.dataHora().isAfter(OffsetDateTime.now())) {
             throw new UnprocessableContent("A data da transação não pode ser no futuro");
         }
+    }
+
+    public void save(TransacaoRequest transacaoRequest) {
+        this.validate(transacaoRequest);
+
+        this.repository.salvarDados(transacaoRequest);
     }
 }
