@@ -32,7 +32,9 @@ public class TransacoesController {
     }
 
     @DeleteMapping()
-    public ResponseEntity deletarTransacao(RequestBody T) {
+    public ResponseEntity deletarTransacao() {
+
+        service.clear();
         return ResponseEntity.ok().build();
     }
 }

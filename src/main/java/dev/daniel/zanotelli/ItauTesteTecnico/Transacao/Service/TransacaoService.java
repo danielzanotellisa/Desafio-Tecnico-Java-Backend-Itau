@@ -3,6 +3,7 @@ package dev.daniel.zanotelli.ItauTesteTecnico.Transacao.Service;
 import dev.daniel.zanotelli.ItauTesteTecnico.Transacao.Repository.TransacaoRepository;
 import dev.daniel.zanotelli.ItauTesteTecnico.Transacao.Request.TransacaoRequest;
 import dev.daniel.zanotelli.ItauTesteTecnico.Transacao.Exceptions.UnprocessableContent;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -11,11 +12,9 @@ import java.time.OffsetDateTime;
 @Service
 public class TransacaoService {
 
-
     private TransacaoRepository repository;
-
-    public TransacaoService() {
-        this.repository = new TransacaoRepository();
+    public TransacaoService(TransacaoRepository repository) {
+        this.repository = repository;
     }
 
     protected void validate(TransacaoRequest transacaoRequest) {
@@ -33,5 +32,9 @@ public class TransacaoService {
         this.validate(transacaoRequest);
 
         this.repository.salvarDados(transacaoRequest);
+    }
+
+    public void clear() {
+        this.repository.deletarDados();
     }
 }
