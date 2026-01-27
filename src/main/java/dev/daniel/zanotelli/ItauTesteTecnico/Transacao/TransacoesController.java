@@ -1,7 +1,10 @@
 package dev.daniel.zanotelli.ItauTesteTecnico.Transacao;
 
+import dev.daniel.zanotelli.ItauTesteTecnico.Transacao.Exceptions.ErrorResponse;
+import dev.daniel.zanotelli.ItauTesteTecnico.Transacao.Exceptions.UnprocessableContent;
 import dev.daniel.zanotelli.ItauTesteTecnico.Transacao.Request.TransacaoRequest;
 import dev.daniel.zanotelli.ItauTesteTecnico.Transacao.Service.TransacaoService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +19,16 @@ public class TransacoesController {
     }
 
     @PostMapping()
-    public ResponseEntity criarTransacao(@RequestBody TransacaoRequest transacaoRequest) {
+    public ResponseEntity criarTransacao(@Valid @RequestBody TransacaoRequest transacaoRequest) {
 
-        service.validate(transacaoRequest);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        try {
+            service.validate(transacaoRequest);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        } catch (UnprocessableContent e) {
+            ErrorResponse error = new ErrorResponse(e.getMessage(), HttpStatus.UNPROCESSABLE_CONTENT.value());
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_CONTENT).body(error);
+
+        }
     }
 
     @DeleteMapping()
