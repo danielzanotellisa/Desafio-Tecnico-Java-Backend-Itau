@@ -5,12 +5,9 @@ import dev.daniel.zanotelli.ItauTesteTecnico.Estatistica.EstatisticaDTO;
 import dev.daniel.zanotelli.ItauTesteTecnico.Transacao.Request.TransacaoRequest;
 import org.springframework.stereotype.Repository;
 
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 
 @Repository
