@@ -1,9 +1,9 @@
 package dev.daniel.zanotelli.ItauTesteTecnico.Transacao.Service;
 
+import dev.daniel.zanotelli.ItauTesteTecnico.Estatistica.EstatisticaDTO;
 import dev.daniel.zanotelli.ItauTesteTecnico.Transacao.Repository.TransacaoRepository;
 import dev.daniel.zanotelli.ItauTesteTecnico.Transacao.Request.TransacaoRequest;
 import dev.daniel.zanotelli.ItauTesteTecnico.Transacao.Exceptions.UnprocessableContent;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -36,5 +36,9 @@ public class TransacaoService {
 
     public void clear() {
         this.repository.deletarDados();
+    }
+
+    public EstatisticaDTO gerarEstatisticas() {
+        return this.repository.gerarEstatisticas();
     }
 }
