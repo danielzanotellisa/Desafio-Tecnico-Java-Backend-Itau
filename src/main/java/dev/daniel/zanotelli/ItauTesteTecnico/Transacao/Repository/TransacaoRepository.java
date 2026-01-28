@@ -36,20 +36,13 @@ public class TransacaoRepository {
             return new EstatisticaDTO(0L,0.0,0.0,0.0,0.0);
         }
 
-        List<BigDecimal> valores = filtradas.stream().map(transacao -> transacao.valor()).collect(Collectors.toList());
-        Double max = Collections.max(valores).doubleValue();
-        Double min = Collections.min(valores).doubleValue();
-        OptionalDouble avg = valores.stream().mapToDouble(valor -> valor.doubleValue()).average();
-        Double sum = valores.stream().mapToDouble(valor -> valor.doubleValue()).sum();
-        Long count = valores.stream().count();
+        final var summary = filtradas.stream().mapToDouble(t -> t.valor().doubleValue()).summaryStatistics();
 
-        EstatisticaDTO estatisticaDTO = new EstatisticaDTO();
-        estatisticaDTO.setMin(min);
-        estatisticaDTO.setAvg(avg.isPresent() ? avg.getAsDouble() : 0);
-        estatisticaDTO.setCount(count);
-        estatisticaDTO.setSum(sum);
-        estatisticaDTO.setMax(max);
-
-        return estatisticaDTO;
+        return new EstatisticaDTO(
+                summary.getCount(),
+                summary.getSum(),
+                summary.getAverage(),
+                summary.getMin(),
+                summary.getMax());
     }
 }
