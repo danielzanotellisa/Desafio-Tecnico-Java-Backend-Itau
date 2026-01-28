@@ -32,15 +32,8 @@ public class TransacaoRepository {
                 .filter(transacao -> transacao.dataHora().isAfter(OffsetDateTime.now().minusSeconds(60)))
                 .collect(Collectors.toList());
 
-        if (filtradas.size() == 0) {
-
-            EstatisticaDTO estatistica = new EstatisticaDTO();
-            estatistica.setCount(0L);
-            estatistica.setAvg((double)0);
-            estatistica.setMax((double)0);
-            estatistica.setSum((double)0);
-            estatistica.setMin((double)0);
-            return estatistica;
+        if (filtradas.isEmpty()) {
+            return new EstatisticaDTO(0L,0.0,0.0,0.0,0.0);
         }
 
         List<BigDecimal> valores = filtradas.stream().map(transacao -> transacao.valor()).collect(Collectors.toList());
